@@ -1,7 +1,8 @@
 {
-  "name": "micromanipulator",
+  "name": "micromanipulator-frontend-app",
   "version": "0.1.0",
-  "private": true,
+  "author": "Andrey Holodnyak",
+  "license": "MIT",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -43,5 +44,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

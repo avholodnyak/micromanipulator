@@ -1,0 +1,9 @@
+{
+  "name": "micromanipulator-mcu-firmware",
+  "version": "0.1.0",
+  "author": "Andrey Holodnyak",
+  "license": "MIT",
+  "devDependencies": {
+    "espruino": "^0.1.40"
+  }
+}
