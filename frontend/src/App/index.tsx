@@ -9,9 +9,7 @@ const App = () => {
 
   return (
     <Cont>
-      <Typography variant="h3">
-        DIY micromanipulator app
-      </Typography>
+      <Typography variant="h3">DIY micromanipulator app</Typography>
 
       <Box my={2}>
         <Button
@@ -25,7 +23,9 @@ const App = () => {
 
       <ButtonGroup>
         <Button
-          onClick={() => uart.write('motors.x.moveTo(motors.x.getPosition() + 500, 1000);\n')}
+          onClick={() =>
+            uart.write('motors.x.moveTo(motors.x.getPosition() + 500, 1000);\n')
+          }
           variant="contained"
           disabled={!connected}
         >
@@ -33,7 +33,9 @@ const App = () => {
         </Button>
 
         <Button
-          onClick={() => uart.write('motors.x.moveTo(motors.x.getPosition() - 500, 1000);\n')}
+          onClick={() =>
+            uart.write('motors.x.moveTo(motors.x.getPosition() - 500, 1000);\n')
+          }
           variant="contained"
           color="secondary"
           disabled={!connected}
@@ -42,7 +44,7 @@ const App = () => {
         </Button>
       </ButtonGroup>
     </Cont>
-  )
+  );
 };
 
 export default App;
