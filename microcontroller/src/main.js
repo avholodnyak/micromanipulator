@@ -9,7 +9,7 @@ const pattern = [
 
 const motors = {
   x: new StepperMotor({
-    pins: [A0, A1, A2, A3],
+    pins: [D18, D19, D20, D22],
     pattern: pattern,
   })
 };

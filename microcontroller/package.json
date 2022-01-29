@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "author": "Andrey Holodnyak",
   "license": "MIT",
+  "scripts": {
+    "upload": "espruino -d MDBT42Q src/main.js",
+    "build": "mkdir -p build && espruino -o build/main.js src/main.js"
+  },
   "devDependencies": {
     "espruino": "^0.1.40"
   }
