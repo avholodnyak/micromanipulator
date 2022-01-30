@@ -1,4 +1,4 @@
-const StepperMotor = require('StepperMotor');
+import StepperMotor from './StepperMotor';
 
 const pattern = [
   0b0001, 0b0011,
@@ -7,7 +7,7 @@ const pattern = [
   0b1000, 0b1001,
 ];
 
-const motors = {
+global.motors = {
   x: new StepperMotor({
     pins: [D18, D19, D20, D22],
     pattern: pattern,

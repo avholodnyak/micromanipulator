@@ -4,10 +4,19 @@
   "author": "Andrey Holodnyak",
   "license": "MIT",
   "scripts": {
-    "upload": "espruino -d MDBT42Q src/main.js",
-    "build": "mkdir -p build && espruino -o build/main.js src/main.js"
+    "build": "webpack",
+    "upload": "espruino -d MDBT42Q build/main.js",
+    "connect": "espruino -d MDBT42Q",
+    "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "espruino": "^0.1.40"
+    "espruino": "^0.1.40",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@types/espruino": "^1.94.6"
   }
 }
