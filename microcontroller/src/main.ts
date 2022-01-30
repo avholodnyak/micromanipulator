@@ -1,12 +1,24 @@
-import StepperMotor from './StepperMotor';
-
-const pattern = [
-  0b0001, 0b0011, 0b0010, 0b0110, 0b0100, 0b1100, 0b1000, 0b1001,
-];
+import { StepperMotor } from './StepperMotor';
 
 global.motors = {
   x: new StepperMotor({
-    pins: [D18, D19, D20, D22],
-    pattern,
+    pins: {
+      enable: D16,
+      step: D15,
+      direction: D14,
+      halfStepMode: D17,
+    },
+    maxSpeed: 1000,
+    maxStartSpeed: 500,
+  }),
+  y: new StepperMotor({
+    pins: {
+      enable: D22,
+      step: D20,
+      direction: D19,
+      halfStepMode: D17,
+    },
+    maxSpeed: 1000,
+    maxStartSpeed: 500,
   }),
 };
