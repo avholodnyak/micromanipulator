@@ -7,16 +7,26 @@
     "build": "webpack",
     "upload": "espruino -d MDBT42Q build/main.js",
     "connect": "espruino -d MDBT42Q",
-    "check-types": "tsc --noEmit"
+    "check:all": "yarn check:ts && yarn check:lint",
+    "check:ts": "tsc --noEmit",
+    "check:lint": "eslint --ext .js,.ts src --fix"
+  },
+  "dependencies": {
+    "@types/espruino": "^1.94.6"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
     "espruino": "^0.1.40",
+    "prettier": "^2.5.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.5",
     "webpack": "^5.67.0",
     "webpack-cli": "^4.9.2"
-  },
-  "dependencies": {
-    "@types/espruino": "^1.94.6"
   }
 }

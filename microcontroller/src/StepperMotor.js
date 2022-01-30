@@ -1,5 +1,7 @@
 /* Copyright (c) 2017 Gordon Williams, Pur3 Ltd. See the file LICENSE for copying permission. */
 
+/* eslint-disable */
+
 /** Create a new stepper instance */
 function StepperMotor(obj) {
   this.pins = obj.pins;
