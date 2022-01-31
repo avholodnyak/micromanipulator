@@ -23,36 +23,45 @@ export class StepperMotor {
   }
 
   protected init() {
-    pinMode(this.config.pins.step, 'auto', true); // TODO
-    this.config.pins.direction.write(true);
-    this.stop();
+    // Disable the motor to avoid overheating
     this.disable();
+
+    // Initialize step pin
+    pinMode(this.config.pins.step, 'auto', true);
+    this.config.pins.step.write(false);
+
+    // Initialize direction pin
+    this.config.pins.direction.write(true);
+
     // Use half step mode
     this.config.pins.halfStepMode.write(true);
   }
 
-  enable() {
+  protected enable() {
     this.config.pins.enable.write(false);
   }
 
-  disable() {
+  protected disable() {
     this.config.pins.enable.write(true);
   }
 
   start({ speed, reverse = false }: { speed?: number; reverse?: boolean }) {
+    this.enable();
     this.config.pins.direction.write(!reverse);
 
     const { maxStartSpeed } = this.config;
     analogWrite(this.config.pins.step, 0.5, {
       freq: speed ?? maxStartSpeed,
       // It seems like there's only 1 hardware PWM
-      // and it's used for all pwm pins.
-      // Use software PWM to allocate an individual PWM for each pin.
-      forceSoft: true, // TODO
+      // and it's used for all PWM pins.
+      // Use software PWM to allocate an individual PWM for each motor.
+      forceSoft: true,
     });
   }
 
   stop = () => {
-    analogWrite(this.config.pins.step, 0, {});
+    this.config.pins.step.write(false);
+    // Disable the motor to avoid overheating
+    this.disable();
   };
 }
