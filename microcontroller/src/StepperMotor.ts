@@ -45,13 +45,13 @@ export class StepperMotor {
     this.config.pins.enable.write(true);
   }
 
-  start({ speed, reverse = false }: { speed?: number; reverse?: boolean }) {
+  start(options: { speed?: number; reverse?: boolean } = {}) {
     this.enable();
-    this.config.pins.direction.write(!reverse);
+    this.config.pins.direction.write(!options.reverse);
 
     const { maxStartSpeed } = this.config;
     analogWrite(this.config.pins.step, 0.5, {
-      freq: speed ?? maxStartSpeed,
+      freq: options.speed ?? maxStartSpeed,
       // It seems like there's only 1 hardware PWM
       // and it's used for all PWM pins.
       // Use software PWM to allocate an individual PWM for each motor.
