@@ -8,8 +8,8 @@ global.motors = {
       direction: D14,
       halfStepMode: D17,
     },
-    maxSpeed: 1000,
-    maxStartSpeed: 500,
+    maxSpeed: 2500,
+    maxStartSpeed: 1000,
   }),
   y: new StepperMotor({
     pins: {
@@ -18,7 +18,7 @@ global.motors = {
       direction: D19,
       halfStepMode: D17,
     },
-    maxSpeed: 1000,
-    maxStartSpeed: 500,
+    maxSpeed: 2500,
+    maxStartSpeed: 1000,
   }),
 };
