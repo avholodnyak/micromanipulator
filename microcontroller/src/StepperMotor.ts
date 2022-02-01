@@ -15,10 +15,18 @@ type MotorConfig = {
 export class StepperMotor {
   protected config: MotorConfig;
 
+  protected static motorsCount = 0;
+
+  protected motorIndex: number;
+
   constructor(config: MotorConfig) {
     this.config = {
       ...config,
     };
+
+    this.motorIndex = StepperMotor.motorsCount;
+    StepperMotor.motorsCount += 1;
+
     this.init();
   }
 
@@ -26,15 +34,33 @@ export class StepperMotor {
     // Disable the motor to avoid overheating
     this.disable();
 
-    // Initialize step pin
-    pinMode(this.config.pins.step, 'auto', true);
-    this.config.pins.step.write(false);
-
-    // Initialize direction pin
-    this.config.pins.direction.write(true);
+    this.allocatePWMTimer();
+    this.setDirection(true);
 
     // Use half step mode
     this.config.pins.halfStepMode.write(true);
+  }
+
+  /**
+   * Unique frequencies used to allocate unique PWM hardware timers.
+   * 10 frequencies should be enough as there are no MCUs with 10+ timers.
+   */
+  protected static uniqueFrequencies = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29].map(
+    (x) => x * 1000
+  );
+
+  /**
+   * Espruino uses 1 PWM hardware timer for all pins with the same frequency.
+   * So when 1 pin is disabled (or its frequency is updated),
+   * the others (with the same frequency) will be disabled (or updated) as well.
+   * To avoid that, allocate a unique timer for each motor by using a unique frequency value.
+   */
+  protected allocatePWMTimer() {
+    const { step } = this.config.pins;
+    pinMode(step, 'auto', true);
+    analogWrite(step, 0, {
+      freq: StepperMotor.uniqueFrequencies[this.motorIndex],
+    });
   }
 
   protected enable() {
@@ -45,23 +71,24 @@ export class StepperMotor {
     this.config.pins.enable.write(true);
   }
 
-  start(options: { speed?: number; reverse?: boolean } = {}) {
-    this.enable();
-    this.config.pins.direction.write(!options.reverse);
+  protected setDirection(clockwise: boolean) {
+    this.config.pins.direction.write(clockwise);
+  }
+
+  start(options: { speed?: number; clockwise?: boolean } = {}) {
+    this.setDirection(options.clockwise ?? true);
 
     const { maxStartSpeed } = this.config;
     analogWrite(this.config.pins.step, 0.5, {
       freq: options.speed ?? maxStartSpeed,
-      // It seems like there's only 1 hardware PWM
-      // and it's used for all PWM pins.
-      // Use software PWM to allocate an individual PWM for each motor.
-      forceSoft: true,
     });
+
+    this.enable();
   }
 
   stop = () => {
-    this.config.pins.step.write(false);
-    // Disable the motor to avoid overheating
+    // Just disable the motor and don't reset the pin
+    // not to lose the allocated PWM timer
     this.disable();
   };
 }
