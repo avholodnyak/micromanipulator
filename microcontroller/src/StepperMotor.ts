@@ -12,7 +12,7 @@ type MotorConfig = {
   halfStepMode?: boolean;
 };
 
-export class StepperMotor {
+export default class StepperMotor {
   protected config: MotorConfig;
 
   protected static motorsCount = 0;

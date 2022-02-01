@@ -1,4 +1,4 @@
-import { StepperMotor } from './StepperMotor';
+import StepperMotor from './StepperMotor';
 
 global.motors = {
   x: new StepperMotor({

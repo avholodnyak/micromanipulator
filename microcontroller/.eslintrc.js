@@ -17,7 +17,6 @@ module.exports = {
         singleQuote: true,
       },
     ],
-    'import/prefer-default-export': 0,
     // Typescript will check imports instead
     'import/extensions': 0,
     'import/no-unresolved': 0,
