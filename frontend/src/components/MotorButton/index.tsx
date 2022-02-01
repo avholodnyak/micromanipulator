@@ -12,7 +12,7 @@ const MotorButton = ({
   rotateClockwise?: boolean;
   direction: ReactNode;
 }) => {
-  const { connected, start, stop } = useMotor(axis);
+  const { connected, start, stop: stopRotation } = useMotor(axis);
 
   const startRotation = useCallback(() => {
     start({ clockwise: rotateClockwise });
@@ -21,9 +21,15 @@ const MotorButton = ({
   return (
     <Button
       onMouseDown={startRotation}
-      onMouseUp={stop}
-      onTouchStart={startRotation}
-      onTouchEnd={stop}
+      onMouseUp={stopRotation}
+      onTouchStart={(e) => {
+        e.preventDefault();
+        startRotation();
+      }}
+      onTouchEnd={(e) => {
+        e.preventDefault();
+        stopRotation();
+      }}
       variant="contained"
       color="secondary"
       disabled={!connected}
