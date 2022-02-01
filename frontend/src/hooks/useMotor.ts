@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import useMcu from 'hooks/useMcu';
 
-type Axis = 'x' | 'y' | 'z';
+export type Axis = 'x' | 'y' | 'z';
 
 const useMotor = (axis: Axis) => {
   const { connected, sendCommand } = useMcu();

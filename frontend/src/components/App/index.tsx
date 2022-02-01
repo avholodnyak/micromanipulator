@@ -2,13 +2,12 @@ import React from 'react';
 import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 
 import useMcu from 'hooks/useMcu';
+import MotorButton from 'components/MotorButton';
 
 import { Cont } from './styled';
-import useMotor from 'hooks/useMotor';
 
 const App = () => {
   const { connected, connect } = useMcu();
-  const motorX = useMotor('x');
 
   return (
     <Cont>
@@ -20,26 +19,18 @@ const App = () => {
         </Button>
       </Box>
 
-      <ButtonGroup>
-        <Button
-          onMouseDown={() => motorX.start({ clockwise: false })}
-          onMouseUp={() => motorX.stop()}
-          variant="contained"
-          color="secondary"
-          disabled={!motorX.connected}
-        >
-          Rotate x axis -
-        </Button>
+      <Box my={2}>
+        <MotorButton axis="y" rotateClockwise={false} direction="up" />
+      </Box>
 
-        <Button
-          onMouseDown={() => motorX.start({ clockwise: true })}
-          onMouseUp={() => motorX.stop()}
-          variant="contained"
-          disabled={!motorX.connected}
-        >
-          Rotate x axis +
-        </Button>
+      <ButtonGroup>
+        <MotorButton axis="x" rotateClockwise={false} direction="left" />
+        <MotorButton axis="x" rotateClockwise={true} direction="right" />
       </ButtonGroup>
+
+      <Box my={2}>
+        <MotorButton axis="y" rotateClockwise={true} direction="down" />
+      </Box>
     </Cont>
   );
 };
