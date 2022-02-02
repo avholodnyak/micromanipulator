@@ -3,20 +3,26 @@ import { Button } from '@mui/material';
 
 import useMotor, { Axis } from 'hooks/useMotor';
 
+import useHotkey from './useHotkey';
+
 const MotorButton = ({
   axis,
   rotateClockwise = true,
   direction,
+  hotkey,
 }: {
   axis: Axis;
   rotateClockwise?: boolean;
   direction: ReactNode;
+  hotkey?: string;
 }) => {
   const { connected, start, stop: stopRotation } = useMotor(axis);
 
   const startRotation = useCallback(() => {
     start({ clockwise: rotateClockwise });
   }, [rotateClockwise, start]);
+
+  useHotkey({ hotkey, onKeyDown: startRotation, onKeyUp: stopRotation });
 
   return (
     <Button

@@ -20,16 +20,36 @@ const App = () => {
       </Box>
 
       <Box my={2}>
-        <MotorButton axis="y" rotateClockwise={false} direction="up" />
+        <MotorButton
+          axis="y"
+          rotateClockwise={false}
+          direction="up"
+          hotkey="ArrowUp"
+        />
       </Box>
 
       <ButtonGroup>
-        <MotorButton axis="x" rotateClockwise={false} direction="left" />
-        <MotorButton axis="x" rotateClockwise={true} direction="right" />
+        <MotorButton
+          axis="x"
+          rotateClockwise={false}
+          direction="left"
+          hotkey="ArrowLeft"
+        />
+        <MotorButton
+          axis="x"
+          rotateClockwise={true}
+          direction="right"
+          hotkey="ArrowRight"
+        />
       </ButtonGroup>
 
       <Box my={2}>
-        <MotorButton axis="y" rotateClockwise={true} direction="down" />
+        <MotorButton
+          axis="y"
+          rotateClockwise={true}
+          direction="down"
+          hotkey="ArrowDown"
+        />
       </Box>
     </Cont>
   );
