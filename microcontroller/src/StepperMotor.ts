@@ -1,3 +1,5 @@
+import isNil from 'is-nil';
+
 type MotorPins = {
   enable: Pin;
   step: Pin;
@@ -75,20 +77,60 @@ export default class StepperMotor {
     this.config.pins.direction.write(clockwise);
   }
 
+  protected setSpeed(speed: number) {
+    analogWrite(this.config.pins.step, 0.5, {
+      freq: speed,
+    });
+  }
+
   start(options: { speed?: number; clockwise?: boolean } = {}) {
+    // In case if previous acceleration hasn't been finished yet
+    this.stopAcceleration();
+
     this.setDirection(options.clockwise ?? true);
 
     const { maxStartSpeed } = this.config;
-    analogWrite(this.config.pins.step, 0.5, {
-      freq: options.speed ?? maxStartSpeed,
-    });
+    const speed = options.speed ?? maxStartSpeed;
 
+    // Starting the motor with speed > maxStartSpeed will get it stuck
+    const startSpeed = Math.min(speed, maxStartSpeed);
+    this.setSpeed(startSpeed);
     this.enable();
+
+    if (speed > startSpeed) {
+      this.accelerate(startSpeed, Math.min(speed, this.config.maxSpeed));
+    }
+  }
+
+  protected accelerationTimeId?: number;
+
+  protected accelerate(from: number, to: number) {
+    // Speed delta in steps per second
+    const speedDelta = 100;
+    // Time delta in ms
+    const timeDelta = 10;
+
+    this.accelerationTimeId = setTimeout(() => {
+      const nextSpeed = from + speedDelta;
+      this.setSpeed(nextSpeed);
+
+      if (nextSpeed < to) {
+        this.accelerate(nextSpeed, to);
+      }
+    }, timeDelta);
+  }
+
+  protected stopAcceleration() {
+    if (isNil(this.accelerationTimeId)) return;
+
+    clearTimeout(this.accelerationTimeId);
+    this.accelerationTimeId = undefined;
   }
 
   stop = () => {
     // Just disable the motor and don't reset the pin
     // not to lose the allocated PWM timer
     this.disable();
+    this.stopAcceleration();
   };
 }

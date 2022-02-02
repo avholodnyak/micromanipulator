@@ -8,7 +8,7 @@ global.motors = {
       direction: D14,
       halfStepMode: D17,
     },
-    maxSpeed: 2500,
+    maxSpeed: 3000,
     maxStartSpeed: 1000,
   }),
   y: new StepperMotor({
@@ -18,7 +18,7 @@ global.motors = {
       direction: D19,
       halfStepMode: D17,
     },
-    maxSpeed: 2500,
+    maxSpeed: 3000,
     maxStartSpeed: 1000,
   }),
 };
