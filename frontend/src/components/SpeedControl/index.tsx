@@ -23,6 +23,11 @@ const SpeedControl = () => {
         max={3000}
         valueLabelDisplay="auto"
         aria-label="Speed"
+        // Disable keyboard control
+        // not to conflict with motors hotkeys
+        onKeyDown={(e) => {
+          e.preventDefault();
+        }}
       />
     </Cont>
   );
