@@ -2,6 +2,7 @@ import React, { ReactNode, useCallback } from 'react';
 import { Button } from '@mui/material';
 
 import useMotor, { Axis } from 'hooks/useMotor';
+import { useSpeedControl } from 'components/SpeedControl';
 
 import useHotkey from './useHotkey';
 
@@ -17,10 +18,11 @@ const MotorButton = ({
   hotkey?: string;
 }) => {
   const { connected, start, stop: stopRotation } = useMotor(axis);
+  const { speed } = useSpeedControl();
 
   const startRotation = useCallback(() => {
-    start({ clockwise: rotateClockwise });
-  }, [rotateClockwise, start]);
+    start({ clockwise: rotateClockwise, speed });
+  }, [start, rotateClockwise, speed]);
 
   useHotkey({ hotkey, onKeyDown: startRotation, onKeyUp: stopRotation });
 

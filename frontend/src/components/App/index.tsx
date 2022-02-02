@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 
 import useMcu from 'hooks/useMcu';
+import SpeedControl from 'components/SpeedControl';
 import MotorButton from 'components/MotorButton';
 
 import { Cont } from './styled';
@@ -50,6 +51,10 @@ const App = () => {
           direction="down"
           hotkey="ArrowDown"
         />
+      </Box>
+
+      <Box my={4} mx={2} width={400} maxWidth="100%">
+        <SpeedControl />
       </Box>
     </Cont>
   );
