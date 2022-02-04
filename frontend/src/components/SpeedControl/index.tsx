@@ -19,8 +19,8 @@ const SpeedControl = () => {
             setSpeed(v);
           }
         }}
-        min={10}
-        max={3000}
+        min={5}
+        max={1500}
         valueLabelDisplay="auto"
         aria-label="Speed"
         // Disable keyboard control

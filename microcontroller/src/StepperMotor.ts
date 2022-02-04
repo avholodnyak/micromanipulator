@@ -1,17 +1,28 @@
 import isNil from 'is-nil';
 
+import objectValues from './helpers/objectValues';
+
 type MotorPins = {
   enable: Pin;
   step: Pin;
   direction: Pin;
-  halfStepMode: Pin;
+};
+
+type MicroStepPinConfig = {
+  pin: Pin;
+  enabled: boolean;
+};
+
+type MicroStepConfig = {
+  pins: Partial<Record<'m1' | 'm2', MicroStepPinConfig>>;
+  multiplier: number;
 };
 
 type MotorConfig = {
   pins: MotorPins;
+  microStep: MicroStepConfig;
   maxSpeed: number;
   maxStartSpeed: number;
-  halfStepMode?: boolean;
 };
 
 export default class StepperMotor {
@@ -39,8 +50,7 @@ export default class StepperMotor {
     this.allocatePWMTimer();
     this.setDirection(true);
 
-    // Use half step mode
-    this.config.pins.halfStepMode.write(true);
+    this.initMicroStep();
   }
 
   /**
@@ -65,6 +75,12 @@ export default class StepperMotor {
     });
   }
 
+  protected initMicroStep() {
+    objectValues(this.config.microStep.pins).forEach(({ pin, enabled }) => {
+      pin.write(enabled);
+    });
+  }
+
   protected enable() {
     this.config.pins.enable.write(false);
   }
@@ -79,7 +95,7 @@ export default class StepperMotor {
 
   protected setSpeed(speed: number) {
     analogWrite(this.config.pins.step, 0.5, {
-      freq: speed,
+      freq: speed / this.config.microStep.multiplier,
     });
   }
 
@@ -106,7 +122,7 @@ export default class StepperMotor {
 
   protected accelerate(from: number, to: number) {
     // Speed delta in steps per second
-    const speedDelta = 100;
+    const speedDelta = 50;
     // Time delta in ms
     const timeDelta = 10;
 
