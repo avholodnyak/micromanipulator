@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Button, ButtonGroup, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 import useMcu from 'hooks/useMcu';
+import AxesControls from 'components/AxesControls';
 import SpeedControl from 'components/SpeedControl';
-import MotorButton from 'components/MotorButton';
 
 import { Cont } from './styled';
 
@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <Cont>
-      <Typography variant="h3">DIY micromanipulator app</Typography>
+      <Typography variant="h3">micromanipulator app</Typography>
 
       <Box my={2}>
         <Button onClick={connect} variant="contained" disabled={connected}>
@@ -20,40 +20,11 @@ const App = () => {
         </Button>
       </Box>
 
-      <Box my={2}>
-        <MotorButton
-          axis="y"
-          rotateClockwise={false}
-          direction="up"
-          hotkey="ArrowUp"
-        />
+      <Box width="100%" my={10}>
+        <AxesControls />
       </Box>
 
-      <ButtonGroup>
-        <MotorButton
-          axis="x"
-          rotateClockwise={false}
-          direction="left"
-          hotkey="ArrowLeft"
-        />
-        <MotorButton
-          axis="x"
-          rotateClockwise={true}
-          direction="right"
-          hotkey="ArrowRight"
-        />
-      </ButtonGroup>
-
-      <Box my={2}>
-        <MotorButton
-          axis="y"
-          rotateClockwise={true}
-          direction="down"
-          hotkey="ArrowDown"
-        />
-      </Box>
-
-      <Box my={4} mx={2} width={400} maxWidth="100%">
+      <Box width="100%">
         <SpeedControl />
       </Box>
     </Cont>

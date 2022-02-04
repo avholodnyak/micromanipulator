@@ -37,4 +37,22 @@ global.motors = {
     maxSpeed: 1500,
     maxStartSpeed: 500,
   }),
+  z: new StepperMotor({
+    pins: {
+      enable: D26,
+      step: D28,
+      direction: D29,
+    },
+    microStep: {
+      pins: {
+        m1: {
+          pin: D27,
+          enabled: false,
+        },
+      },
+      multiplier: 1 / 8,
+    },
+    maxSpeed: 1500,
+    maxStartSpeed: 500,
+  }),
 };

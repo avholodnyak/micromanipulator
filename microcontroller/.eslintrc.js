@@ -21,4 +21,12 @@ module.exports = {
     'import/extensions': 0,
     'import/no-unresolved': 0,
   },
+  overrides: [
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        'no-unused-vars': 0,
+      },
+    },
+  ],
 };

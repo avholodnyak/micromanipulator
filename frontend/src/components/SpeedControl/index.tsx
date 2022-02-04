@@ -1,6 +1,8 @@
 import React from 'react';
 import { Slider, Typography } from '@mui/material';
 
+import useMcu from 'hooks/useMcu';
+
 import { Cont } from './styled';
 import useSpeedControl from './useSpeedControl';
 
@@ -8,6 +10,7 @@ export { default as useSpeedControl } from './useSpeedControl';
 
 const SpeedControl = () => {
   const { speed, setSpeed } = useSpeedControl();
+  const { connected } = useMcu();
 
   return (
     <Cont>
@@ -28,6 +31,7 @@ const SpeedControl = () => {
         onKeyDown={(e) => {
           e.preventDefault();
         }}
+        disabled={!connected}
       />
     </Cont>
   );
