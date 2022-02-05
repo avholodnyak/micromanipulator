@@ -12,15 +12,15 @@ const App = () => {
 
   return (
     <Cont>
-      <Typography variant="h3">micromanipulator app</Typography>
+      <Typography variant="h4">DIY Micromanipulator</Typography>
 
-      <Box my={2}>
+      <Box my={4}>
         <Button onClick={connect} variant="contained" disabled={connected}>
-          Connect!
+          Connect
         </Button>
       </Box>
 
-      <Box width="100%" my={10}>
+      <Box width="100%" my={12}>
         <AxesControls />
       </Box>
 
