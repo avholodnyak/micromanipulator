@@ -1,5 +1,6 @@
-import React, { ReactNode, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { IconButton } from '@mui/material';
+import { SvgIconComponent } from '@mui/icons-material';
 
 import useMotor, { Axis } from 'hooks/useMotor';
 import { useSpeedControl } from 'components/SpeedControl';
@@ -10,12 +11,12 @@ const MotorButton = ({
   axis,
   rotateClockwise = true,
   hotkey,
-  icon,
+  Icon,
 }: {
   axis: Axis;
   rotateClockwise?: boolean;
   hotkey?: string;
-  icon: ReactNode;
+  Icon: SvgIconComponent;
 }) => {
   const { connected, start, stop: stopRotation } = useMotor(axis);
   const { speed } = useSpeedControl();
@@ -40,9 +41,10 @@ const MotorButton = ({
       }}
       disabled={!connected}
       size="large"
+      sx={{ fontSize: '3rem' }}
       color="primary"
     >
-      {icon}
+      <Icon fontSize="inherit" />
     </IconButton>
   );
 };

@@ -16,9 +16,9 @@ import { Cont, ZCont, XYCont, YBtnCont, XCont } from './styled';
 const AxesControls = () => (
   <Cont>
     <ZCont>
-      <MotorButton axis="z" rotateClockwise={true} icon={<ArrowDropUp />} />
+      <MotorButton axis="z" rotateClockwise={true} Icon={ArrowDropUp} />
       <Typography color="#999">Z</Typography>
-      <MotorButton axis="z" rotateClockwise={false} icon={<ArrowDropDown />} />
+      <MotorButton axis="z" rotateClockwise={false} Icon={ArrowDropDown} />
     </ZCont>
 
     <XYCont>
@@ -27,7 +27,7 @@ const AxesControls = () => (
           axis="y"
           rotateClockwise={false}
           hotkey="ArrowUp"
-          icon={<KeyboardArrowUp />}
+          Icon={KeyboardArrowUp}
         />
       </YBtnCont>
 
@@ -36,13 +36,13 @@ const AxesControls = () => (
           axis="x"
           rotateClockwise={false}
           hotkey="ArrowLeft"
-          icon={<KeyboardArrowLeft />}
+          Icon={KeyboardArrowLeft}
         />
         <MotorButton
           axis="x"
           rotateClockwise={true}
           hotkey="ArrowRight"
-          icon={<KeyboardArrowRight />}
+          Icon={KeyboardArrowRight}
         />
       </XCont>
 
@@ -52,7 +52,7 @@ const AxesControls = () => (
             axis="y"
             rotateClockwise={true}
             hotkey="ArrowDown"
-            icon={<KeyboardArrowDown />}
+            Icon={KeyboardArrowDown}
           />
         </YBtnCont>
       </YBtnCont>
