@@ -8,8 +8,15 @@ const useMcu = () => {
     'hooks.useMcu.connected',
     uart.isConnected()
   );
+
   const connect = useCallback(() => {
-    uart.connect(() => setConnected(true));
+    uart.connect((connection) => {
+      setConnected(true);
+
+      connection.on('close', () => {
+        setConnected(false);
+      });
+    });
   }, [setConnected]);
 
   const sendCommand = useCallback((command: string) => {
