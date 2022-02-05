@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/micromanipulator/static/css/main.e6c13ad2.css",
-    "main.js": "/micromanipulator/static/js/main.d4db0e7c.js",
+    "main.js": "/micromanipulator/static/js/main.c7b56f22.js",
     "static/js/787.05042827.chunk.js": "/micromanipulator/static/js/787.05042827.chunk.js",
     "index.html": "/micromanipulator/index.html",
     "main.e6c13ad2.css.map": "/micromanipulator/static/css/main.e6c13ad2.css.map",
-    "main.d4db0e7c.js.map": "/micromanipulator/static/js/main.d4db0e7c.js.map",
+    "main.c7b56f22.js.map": "/micromanipulator/static/js/main.c7b56f22.js.map",
     "787.05042827.chunk.js.map": "/micromanipulator/static/js/787.05042827.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.d4db0e7c.js"
+    "static/js/main.c7b56f22.js"
   ]
 }
