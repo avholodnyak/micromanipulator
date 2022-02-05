@@ -90,7 +90,7 @@ export default class StepperMotor {
   }
 
   protected setDirection(clockwise: boolean) {
-    this.config.pins.direction.write(clockwise);
+    this.config.pins.direction.write(!clockwise);
   }
 
   protected setSpeed(speed: number) {
