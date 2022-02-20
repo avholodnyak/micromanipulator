@@ -3,54 +3,66 @@ import StepperMotor from './StepperMotor';
 global.motors = {
   x: new StepperMotor({
     pins: {
-      enable: D16,
-      step: D15,
-      direction: D14,
+      enable: D29,
+      step: D26,
+      direction: D25,
     },
     microStep: {
       pins: {
-        m1: {
-          pin: D17,
+        ms1: {
+          pin: D28,
+          enabled: false,
+        },
+        ms2: {
+          pin: D27,
           enabled: true,
         },
       },
-      multiplier: 1 / 2,
+      multiplier: 1 / 64,
     },
     maxSpeed: 1500,
     maxStartSpeed: 500,
   }),
   y: new StepperMotor({
     pins: {
-      enable: D22,
-      step: D20,
-      direction: D19,
+      enable: D18,
+      step: D15,
+      direction: D14,
     },
     microStep: {
       pins: {
-        m1: {
+        ms1: {
           pin: D17,
+          enabled: false,
+        },
+        ms2: {
+          pin: D16,
           enabled: true,
         },
       },
-      multiplier: 1 / 2,
+      multiplier: 1 / 64,
     },
     maxSpeed: 1500,
     maxStartSpeed: 500,
   }),
   z: new StepperMotor({
     pins: {
-      enable: D26,
-      step: D28,
-      direction: D29,
+      enable: D31,
+      step: D5,
+      direction: D11,
     },
     microStep: {
       pins: {
-        m1: {
-          pin: D27,
+        ms1: {
+          pin: D3,
           enabled: false,
         },
+        ms2: {
+          pin: D4,
+          enabled: true,
+        },
       },
-      multiplier: 1 / 8,
+      multiplier: 1 / 64,
     },
     maxSpeed: 1500,
     maxStartSpeed: 500,

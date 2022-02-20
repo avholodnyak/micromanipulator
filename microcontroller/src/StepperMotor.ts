@@ -14,7 +14,7 @@ type MicroStepPinConfig = {
 };
 
 type MicroStepConfig = {
-  pins: Partial<Record<'m1' | 'm2', MicroStepPinConfig>>;
+  pins: Partial<Record<'ms1' | 'ms2', MicroStepPinConfig>>;
   multiplier: number;
 };
 
