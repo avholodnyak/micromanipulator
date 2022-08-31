@@ -13,7 +13,6 @@
     "check:lint": "eslint --ext .js,.ts src --fix"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.3.1",
     "@types/espruino": "^1.94.6",
     "is-nil": "^1.0.1"
   },
