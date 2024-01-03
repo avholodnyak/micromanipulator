@@ -30,3 +30,8 @@ export const XCont = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const RCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

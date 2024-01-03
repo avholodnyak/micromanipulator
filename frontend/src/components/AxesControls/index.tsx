@@ -10,8 +10,9 @@ import {
 } from '@mui/icons-material';
 
 import MotorButton from 'components/MotorButton';
+import RMotorButton from './RMotorButton';
 
-import { Cont, ZCont, XYCont, YBtnCont, XCont } from './styled';
+import { Cont, ZCont, XYCont, YBtnCont, XCont, RCont } from './styled';
 
 const AxesControls = () => (
   <Cont>
@@ -20,6 +21,12 @@ const AxesControls = () => (
       <Typography color="#999">Z</Typography>
       <MotorButton axis="z" rotateClockwise={true} Icon={ArrowDropDown} />
     </ZCont>
+
+    <RCont>
+      <RMotorButton rotateClockwise={false} Icon={ArrowDropUp} />
+      <Typography color="#999">R</Typography>
+      <RMotorButton rotateClockwise={true} Icon={ArrowDropDown} />
+    </RCont>
 
     <XYCont>
       <YBtnCont>
